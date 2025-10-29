@@ -1,193 +1,26 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minhas Finanças - Budget App</title>
-
+    <title>Minhas Finanças</title>
     <link rel="stylesheet" href="style.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 </head>
 
 <body>
-    <div class="container">
-
-        <header class="header">
-            <p id="saudacao-usuario">Olá, Alan 👋</p>
-            <h1>Seu resumo financeiro deste mês</h1>
-            <button id="btn-gerenciar-app" class="btn btn-secondary">
-                <i class="fas fa-cog"></i> Config
-            </button>
-
-            </header>
-
-        <div class="desktop-layout">
-
-            <div>
-                <section class="saldo-atual-card">
-                    <h2>Saldo Atual</h2>
-                    <p class="saldo-valor">R$ <span id="saldo-total">0,00</span></p>
-                    <p class="limite-mensal">Limite Mensal: R$ <span id="limite-mensal">0,00</span> (<span
-                            id="percentual-usado">0%</span> usado)</p>
-
-                </section>
-
-                <section class="botoes-acao">
-                    <button class="btn btn-entrada">
-                        <i class="fas fa-plus"></i> Adicionar Entrada
-                    </button>
-                    <button class="btn btn-gasto">
-                        <i class="fas fa-minus"></i> Adicionar Gasto
-                    </button>
-                </section>
-
-                <section class="resumo-gastos">
-                    <h2>Resumo de Gastos</h2>
-                    <div class="grafico-container">
-                        <canvas id="graficoPizza"></canvas>
-                    </div>
-                </section>
-            </div>
-
-            <div>
-                <section class="ultimas-transacoes">
-                    <div class="header-transacoes">
-                        <h2>Últimas Transações</h2>
-                        <button class="btn-ver-tudo" id="btn-ver-todas-transacoes">
-                            Ver Tudo <i class="fas fa-chevron-right"></i>
-                        </button>
-
-                    </div>
-
-                    <div class="lista-transacoes">
-                        <p style="text-align: center; color: var(--text-muted); padding: 10px;">Nenhuma transação
-                            recente.</p>
-                    </div>
-                </section>
-            </div>
-
+    <div class="container-central">
+    <div class="cadastro"> 
+        <h1 class="h1">Cadastro</h1>
+        <label class="label">Nome</label>
+        <input class="input" type="text" id="nome-usuario-input" name="Nome" placeholder="Nome">
+        <label class="label">Senha</label>
+        <input class="input" type="password" name="Senha" placeholder="Senha">
+        <button class="botao" type="button" onclick="salvarNomeEEntrar()">Entrar</button> 
         </div>
-    </div>
-
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active">
-            <i class="fas fa-home"></i>
-            <span>Início</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fas fa-chart-bar"></i>
-            <span>Gastos</span>
-        </a>
-        <a href="javascript:void(0);" class="nav-item" id="btn-configuracoes-nav">
-            <i class="fas fa-cog"></i>
-            <span>Config</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fas fa-ellipsis-h"></i>
-            <span>Mais</span>
-        </a>
-    </nav>
-
-    <div id="transaction-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Nova Transação</h2>
-            <form id="transaction-form">
-                <input type="hidden" id="tipo-transacao" name="tipo" value="saida">
-                <div class="input-group">
-                    <label for="descricao">Descrição</label>
-                    <input type="text" id="descricao" placeholder="Ex: Aluguel, Salário, Cinema" required>
-                </div>
-                <div class="input-group">
-                    <label for="valor">Valor (R$)</label>
-                    <input type="number" id="valor" step="0.01" min="0.01" placeholder="0.00" required>
-                </div>
-                <div class="input-group">
-                    <label>Categoria</label>
-                    <select id="categoria" required>
-                        <option value="" disabled selected>Selecione a Categoria</option>
-                        <option value="fixo">Gasto Fixo (Ex: Aluguel, Contas)</option>
-                        <option value="superfluo">Gasto Supérfluo (Ex: Lazer, Compras)</option>
-                        <option value="renda">Renda (Ex: Salário, Extra)</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label>Meio de Pagamento</label>
-                    <div class="radio-group">
-                        <input type="radio" id="meio-fisico" name="meio" value="fisico" checked>
-                        <label for="meio-fisico"><i class="fas fa-money-bill-wave"></i> Físico</label>
-
-                        <input type="radio" id="meio-digital" name="meio" value="digital">
-                        <label for="meio-digital"><i class="fas fa-credit-card"></i> Digital</label>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-salvar">Salvar Transação</button>
-            </form>
         </div>
-    </div>
-
-    <div id="settings-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" id="close-settings-modal">&times;</span>
-            <h2>Configurações do Mês</h2>
-
-            <div class="settings-group">
-                <h3>Renda Mensal</h3>
-                <p>Valor atual: R$ <span id="renda-atual-display">0,00</span></p>
-                <form id="renda-form" class="input-inline">
-                    <input class="number" id="nova-renda" type="number" step="0.01" min="0" placeholder="Novo Valor (R$)" required>
-                    <button type="submit" class="btn btn-salvar btn-pequeno">Alterar</button>
-                </form>
-            </div>
-
-            <hr style="border-color: var(--border-color);">
-
-            <div class="settings-group">
-                <h3>Limite de Gastos</h3>
-                <p>Valor atual: R$ <span id="limite-atual-display">0,00</span></p>
-                <form id="limite-form" class="input-inline">
-                    <input class="number" id="novo-limite" type="number" step="0.01" min="0" placeholder="Novo Limite (R$)" required>
-                    <button type="submit" class="btn btn-salvar btn-pequeno">Alterar</button>
-                </form>
-            </div>
-
-            <hr style="border-color: var(--border-color);">
-
-            <div class="settings-group">
-                <h3>Finalizar Mês</h3>
-                <p>Esta ação apagará **apenas** as transações atuais, preparando o aplicativo para um novo ciclo.</p>
-                <button class="btn btn-warning" id="btn-finalizar-mes" style="margin-top: 5px;">
-                    <i class="fas fa-sync-alt"></i> Finalizar Mês / Resetar Transações
-                </button>
-            </div>
-            
-            <hr style="border-color: #d32f2f;">
-
-            <div class="settings-group">
-                <h3>Reset Geral (Dados de Fábrica)</h3>
-                <p style="color: #d32f2f;">Atenção: Esta ação apagará TUDO: Renda, Limite e Transações. Irreversível!</p>
-                <button id="btn-reset-geral" class="btn btn-danger" style="margin-top: 5px;">
-                    <i class="fas fa-trash-alt"></i> Reset Geral (Apagar Tudo)
-                </button>
-            </div>
-        </div>
-    </div>
-    <div id="transactions-list-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" id="close-transactions-list-modal">&times;</span>
-            <h2>Todas as Transações</h2>
-            <div id="lista-transacoes-completa" class="lista-transacoes lista-transacoes-modal">
-                <p style="text-align: center; color: var(--text-muted); padding: 10px;">Carregando...</p>
-            </div>
-        </div>
-    </div>
-
-
-    <script src="script.js"></script>
+        <script src="script.js"></script>
 </body>
 
 </html>
