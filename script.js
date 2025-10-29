@@ -72,7 +72,7 @@ function salvarNomeEEntrar() {
             localStorage.removeItem(STORAGE_KEY);
 
             // Redireciona para a Home Page 
-            window.location.href = "index.html"; 
+            window.location.href = "home.html"; 
         } else {
             alert("Por favor, digite seu nome.");
         }
