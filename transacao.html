@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova Transação</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="transaction-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Nova Transação</h2>
+        
+        <form id="transaction-form">
+            
+            <input type="hidden" id="tipo-transacao" name="tipo" value="saida"> 
+
+            <div class="input-group">
+                <label for="descricao">Descrição</label>
+                <input type="text" id="descricao" required>
+            </div>
+
+            <div class="input-group">
+                <label for="valor">Valor (R$)</label>
+                <input type="number" id="valor" step="0.01" min="0.01" required>
+            </div>
+
+            <div class="input-group">
+                <label>Categoria</label>
+                <select id="categoria" required>
+                    <option value="" disabled selected>Selecione a Categoria</option>
+                    <option value="fixo">Gasto Fixo</option>
+                    <option value="superfluo">Gasto Supérfluo</option>
+                    <option value="renda">Renda (Entrada)</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label>Meio de Pagamento</label>
+                <div class="radio-group">
+                    <input type="radio" id="meio-fisico" name="meio" value="fisico" checked>
+                    <label for="meio-fisico"><i class="fas fa-money-bill-wave"></i> Físico</label>
+                    
+                    <input type="radio" id="meio-digital" name="meio" value="digital">
+                    <label for="meio-digital"><i class="fas fa-credit-card"></i> Digital</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-salvar">Salvar Transação</button>
+        </form>
+    </div>
+</div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

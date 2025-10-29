@@ -1,0 +1,613 @@
+/* ============================================== */
+/* 1. GERAIS E VARIÁVEIS (Mobile-First)             */
+/* ============================================== */
+:root {
+    /* Cores de Fundo e Texto */
+    --bg-dark: #121212;
+    --card-dark: #1E1E1E;
+    --text-light: #E0E0E0;
+    --text-muted: #B0B0B0;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    /* Sombra mais escura para o fundo dark */
+
+    /* Cores Funcionais */
+    --primary-green: #4CAF50;
+    /* Entradas/Sucesso */
+    --primary-red: #F44336;
+    /* Saídas/Perigo */
+    --accent-blue: #2196F3;
+    /* Destaque Principal/Ações */
+    --link-blue: #1565C0;
+    /* Para o gradiente do card principal */
+}
+
+/* Reset Básico e Estilos Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Novo Stack de Fontes: Mais moderno e suave */
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    padding-bottom: 70px;
+    /* Garante espaço para o bottom-nav no mobile */
+
+}
+
+.container {
+    max-width: 450px;
+    /* Largura ideal para experiência mobile */
+    margin: 0 auto;
+    padding: 20px;
+    padding-bottom: 80px;
+    /* Espaço para a barra de navegação inferior */
+}
+
+/* ============================================== */
+/* 2. COMPONENTES: HEADER E BOTÕES DE AÇÃO */
+/* ============================================== */
+.header {
+    margin-bottom: 25px;
+}
+
+.header p {
+    font-size: 1.1em;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+
+.header h1 {
+    font-size: 1.6em;
+    font-weight: 600;
+}
+
+.botoes-acao {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    flex: 1;
+    padding: 15px 10px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    color: var(--text-light);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+}
+
+.btn-entrada {
+    background-color: var(--primary-green);
+    color: var(--bg-dark);
+    /* Texto escuro no botão verde */
+}
+
+.btn-gasto {
+    background-color: var(--primary-red);
+}
+
+/* ============================================== */
+/* 3. CARTÃO DE SALDO ATUAL */
+/* ============================================== */
+.saldo-atual-card {
+    background: linear-gradient(135deg, var(--accent-blue), var(--link-blue));
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    color: white;
+    
+}
+
+.saldo-atual-card h2 {
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 10px;
+}
+
+.saldo-atual-card .saldo-valor {
+    font-size: 2.8em;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.saldo-atual-card .limite-mensal {
+    font-size: 0.95em;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+
+/* ============================================== */
+/* 4. SEÇÕES, GRÁFICO E TRANSAÇÕES */
+/* ============================================== */
+/* Usado para envolver o gráfico e a lista de transações (no mobile) */
+section {
+    background-color: var(--card-dark);
+    /* Usa a nova variável de card */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    margin-bottom: 30px;
+}
+
+section h2 {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+/* Gráfico */
+.grafico-container {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+}
+
+/* Lista de Transações - Header */
+.header-transacoes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.btn-ver-tudo {
+    background: none;
+    border: none;
+    color: var(--accent-blue);
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 0;
+}
+
+.btn-ver-tudo:hover {
+    color: var(--text-light);
+}
+
+/* Lista de Transações - Itens */
+.lista-transacoes {
+    padding: 0 0px;
+    /* Ajuste para controle do item */
+}
+
+.transacao-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: background-color 0.2s;
+}
+
+.transacao-item:hover {
+    background-color: #2a2a2a;
+    /* Leve destaque no hover */
+    border-radius: 8px;
+}
+
+.transacao-item:last-child {
+    border-bottom: none;
+}
+
+.transacao-icone {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    margin-right: 15px;
+}
+
+.transacao-icone.entrada {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: var(--primary-green);
+}
+
+.transacao-icone.saida {
+    background-color: rgba(244, 67, 54, 0.2);
+    color: var(--primary-red);
+}
+
+.transacao-detalhes {
+    flex-grow: 1;
+}
+
+.transacao-detalhes h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.transacao-detalhes p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.transacao-valor {
+    font-weight: 700;
+}
+
+.transacao-valor.entrada {
+    color: var(--primary-green);
+}
+
+.transacao-valor.saida {
+    color: var(--primary-red);
+}
+
+
+/* ============================================== */
+/* 5. NAVEGAÇÃO, MODAIS E CONFIGURAÇÕES */
+/* ============================================== */
+
+/* Navegação Inferior (Mobile) */
+.bottom-nav {
+    background-color: var(--card-dark);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 450px;
+    /* Alinha com o container */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 -4px 10px var(--shadow-color);
+    z-index: 1000;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85em;
+    padding: 5px;
+    transition: color 0.2s ease;
+}
+
+.nav-item i {
+    font-size: 1.4em;
+    margin-bottom: 5px;
+}
+
+.nav-item.active,
+.nav-item:hover {
+    color: var(--accent-blue);
+}
+
+/* Estilos do Modal (Geral) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.modal-content {
+    background-color: var(--card-dark);
+    
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: var(--text-muted);
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: var(--text-light);
+}
+
+.modal h2 {
+    color: var(--accent-blue);
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+/* Formulário do Modal */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    box-sizing: border-box;
+}
+
+.btn-salvar {
+    background-color: var(--accent-blue);
+    color: var(--bg-dark);
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Configurações (Renda/Limite/Ciclo) */
+.settings-group {
+    margin-bottom: 25px;
+    padding: 10px 0;
+}
+
+.settings-group h3 {
+    color: var(--accent-blue);
+    font-size: 1.1em;
+}
+
+.input-inline {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.input-inline input {
+    flex-grow: 1;
+    background-color: var(--bg-dark);
+    border-color: rgba(255, 255, 255, 0.2);
+    padding: 8px;
+    
+}
+
+.btn-warning {
+    background-color: var(--primary-green);
+    color: var(--bg-dark);
+    padding: 8px 15px;
+    font-size: 0.9em;
+    white-space: nowrap;
+    width: auto;
+}
+
+.btn-danger {
+    background-color: var(--primary-red);
+    color: white;
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.lista-transacoes-modal {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 0 5px;
+}
+
+/* ============================================== */
+/* 6. MEDIA QUERIES PARA DESKTOP E TELAS MAIORES     */
+/* ============================================== */
+
+@media screen and (min-width: 768px) {
+
+    /* 1. CONTAINER PRINCIPAL: Aumenta a largura */
+    body {
+        padding-bottom: 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        /* Largura ideal para desktop */
+        padding: 40px;
+        padding-bottom: 40px;
+    }
+
+    /* 2. BARRA DE NAVEGAÇÃO: Remove a nav mobile de baixo */
+    .bottom-nav {
+        display: none;
+    }
+
+    /* 3. LAYOUT PRINCIPAL: Cria um layout em colunas (40% | 60%) */
+    .desktop-layout {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    /* 4. COLUNA ESQUERDA (Cards de Saldo, Ação e Gráfico) - Layout Aninhado */
+    .desktop-layout>div:first-child {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        /* Define as áreas para o layout 2x2 */
+        grid-template-areas:
+            "saldo acao"
+            "grafico grafico";
+    }
+
+    /* Posiciona os elementos dentro do grid aninhado */
+    .saldo-atual-card {
+        grid-area: saldo;
+        padding: 30px;
+        /* Um pouco maior no desktop */
+        text-align: left;
+        margin-bottom: 0;
+        /* Removido o margin-bottom para o grid controlar */
+    }
+
+    .botoes-acao {
+        grid-area: acao;
+        display: flex;
+        flex-direction: column;
+        /* Botões na vertical no desktop */
+        margin-bottom: 0;
+        /* Removido o margin-bottom para o grid controlar */
+    }
+
+    .resumo-gastos {
+        grid-area: grafico;
+        margin-bottom: 0;
+        /* Removido o margin-bottom para o grid controlar */
+        padding: 30px;
+    }
+
+    /* 5. COLUNA DIREITA (Transações) */
+    .ultimas-transacoes {
+        margin-bottom: 0;
+        padding: 30px;
+    }
+
+    /* 6. GRÁFICO: Ajusta a altura para ser mais visível */
+    .grafico-container {
+        height: 350px;
+    }
+
+    /* 7. MODAIS: Aumenta a largura para facilitar a interação */
+    .modal-content {
+        max-width: 550px;
+        margin-top: 80px;
+    }
+}
+
+#resetButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #f44336;
+    /* Vermelho para 'reset' */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#resetButton:hover {
+    background-color: #d32f2f;
+}
+
+.number {
+    color: white;
+}
+
+.btn-secondary {
+    color: #121212;
+}
+
+/* Estiliza a tela de cadastro */
+
+.cadastro {
+    border: 1px;
+    background-color: #1E1E1E;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    font-size: 20px;
+    width: 400px;
+    height: 550px;
+}
+
+.label {
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    font-family: Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, ' Open Sans', ' Helvetica Neue', sans-serif';
+}
+
+.h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 55px;
+
+}
+
+.input {
+    font-size: 25px;
+    background-color: var(--bg-dark);
+    border-color: rgba(255, 255, 255, 0.2);
+    padding: 5px;
+    color: #E0E0E0;
+    border-radius: 10px;
+}
+
+.botao {
+    font-size: 20px;
+    background-color: #1565C0;
+    color: #E0E0E0;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.botao:hover {
+    background-color: #0056b3;
+    color: #ffc107;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.container-central {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
